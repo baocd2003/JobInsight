@@ -1,0 +1,134 @@
+/* ─── CSS Custom Properties ─────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-0: #0a0a0f;
+  --bg-1: #0e0e18;
+  --bg-2: #13131f;
+  --bg-3: #1a1a28;
+
+  /* Glass */
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.18);
+
+  /* Accent — electric blue */
+  --accent: #4f9cf9;
+  --accent-light: #7db9fb;
+  --accent-dim: rgba(79, 156, 249, 0.1);
+  --accent-glow: rgba(79, 156, 249, 0.22);
+
+  /* Text */
+  --text-1: #eeeef8;
+  --text-2: #9898b8;
+  --text-3: #56567a;
+
+  /* Gradients */
+  --grad-hero: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(79, 156, 249, 0.14) 0%, transparent 65%);
+  --grad-accent: linear-gradient(135deg, var(--accent) 0%, #7dd3fc 100%);
+  --grad-divider: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+
+  /* Radius */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+
+  /* Fonts */
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ─── Global Reset & Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-0);
+  color: var(--text-1);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-3);
+  border-radius: 99px;
+  &:hover {
+    background: var(--text-3);
+  }
+}
+
+/* ─── Noise texture overlay ─────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ─── Scroll fade-in animation ──────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── ABP spinner ───────────────────────────────────────────────────────────── */
+@keyframes donut-spin {
+  to { transform: rotate(360deg); }
+}
+.donut {
+  display: inline-block;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-left-color: var(--accent);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: donut-spin 1.2s linear infinite;
+  &.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ─── ABP logo vars ─────────────────────────────────────────────────────────── */
+:root {
+  --lpx-logo: url('/assets/images/logo/logo-light.png');
+  --lpx-logo-icon: url('/assets/images/logo/logo-light-thumbnail.png');
+}
+.abp-logo { background-repeat: no-repeat; }
+.abp-support { width: 178px; height: 30px; background-image: url('/assets/images/getting-started/abp-support.svg'); }
+.abp-community { width: 215px; height: 30px; background-image: url('/assets/images/getting-started/abp-community.svg'); }
+.abp-blog { width: 142px; height: 30px; background-image: url('/assets/images/getting-started/abp-blog.svg'); }
+.logo-x { width: 20px; height: 20px; background-image: url('/assets/images/getting-started/x.svg'); }

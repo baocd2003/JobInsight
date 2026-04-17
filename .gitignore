@@ -1,0 +1,33 @@
+# ── Secrets ──────────────────────────────────────────────────────────────────
+ai-features/.env
+**/*.env.local
+.claude/settings.local.json
+
+# ── Python ───────────────────────────────────────────────────────────────────
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+ai-features/.venv/
+ai-features/venv/
+ai-features/*.egg-info/
+
+# ── .NET / C# ─────────────────────────────────────────────────────────────────
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+aspnet-core/src/*/appsettings.Development.json
+aspnet-core/src/*/appsettings.Production.json
+
+# ── Angular ───────────────────────────────────────────────────────────────────
+angular/node_modules/
+angular/dist/
+angular/.angular/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

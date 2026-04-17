@@ -1,0 +1,22 @@
+<div class="tag-onboarding">
+  <h2>Tell us about you</h2>
+  <p class="subtitle">Choose the options that best describe you. You can pick multiple where allowed.</p>
+
+  <div *ngFor="let cat of categories" class="category">
+    <h3>{{ cat.title }}</h3>
+    <div class="options">
+      <button
+        class="option"
+        *ngFor="let o of cat.options"
+        [class.selected]="isSelected(cat.key, o.id)"
+        (click)="toggle(cat.key, o, cat.multi)">
+        {{ o.label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" (click)="router.navigate(['/'])">Back</button>
+    <button class="btn btn-primary" (click)="save()">Save & Continue</button>
+  </div>
+</div>

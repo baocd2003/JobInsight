@@ -1,0 +1,144 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Application", "JobInsight.Application\JobInsight.Application.csproj", "{D2332635-81B5-DD3D-C0FA-122A0F55C68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Application.Contracts", "JobInsight.Application.Contracts\JobInsight.Application.Contracts.csproj", "{2B629DE7-F200-DE13-DEFF-395EEDE23A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.AuthServer", "JobInsight.AuthServer\JobInsight.AuthServer.csproj", "{006C1889-ECF8-0555-F287-CB5DB0D06AD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor", "JobInsight.Blazor\JobInsight.Blazor.csproj", "{2CC7693F-617A-5F4B-C994-E5461297C09C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.Client", "JobInsight.Blazor.Client\JobInsight.Blazor.Client.csproj", "{B49CF7EE-2512-91C3-4466-0DB98127C1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.Server", "JobInsight.Blazor.Server\JobInsight.Blazor.Server.csproj", "{C976B765-B99F-B8C0-AF9B-BA8875F04C7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.Server.Tiered", "JobInsight.Blazor.Server.Tiered\JobInsight.Blazor.Server.Tiered.csproj", "{055C25BE-88DD-655B-D45F-83177A2D94AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.WebApp", "JobInsight.Blazor.WebApp\JobInsight.Blazor.WebApp.csproj", "{93EED065-929E-C5DD-B1D4-D2D00CC7276D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.WebApp.Client", "JobInsight.Blazor.WebApp.Client\JobInsight.Blazor.WebApp.Client.csproj", "{66D5007A-93EE-EA36-B3C8-C1605A11565A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.WebApp.Tiered", "JobInsight.Blazor.WebApp.Tiered\JobInsight.Blazor.WebApp.Tiered.csproj", "{3B79F3CA-2203-D194-3DEE-804AE2A19621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Blazor.WebApp.Tiered.Client", "JobInsight.Blazor.WebApp.Tiered.Client\JobInsight.Blazor.WebApp.Tiered.Client.csproj", "{39F382C5-F224-ABF3-1DC1-91911DF2E2EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.DbMigrator", "JobInsight.DbMigrator\JobInsight.DbMigrator.csproj", "{7A320CBA-D935-9F86-FDF0-6217F883D2F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Domain", "JobInsight.Domain\JobInsight.Domain.csproj", "{066D2F77-1A7A-E1FF-E943-83FAF0F8AB4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Domain.Shared", "JobInsight.Domain.Shared\JobInsight.Domain.Shared.csproj", "{52A122DA-DD05-9C17-3E1C-16BEE2577DF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.EntityFrameworkCore", "JobInsight.EntityFrameworkCore\JobInsight.EntityFrameworkCore.csproj", "{4051CECC-C93E-D1BA-02C4-E67802C5FC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.HttpApi", "JobInsight.HttpApi\JobInsight.HttpApi.csproj", "{4BDFEEF4-7914-D7C9-C0E5-4B5F70E3BAB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.HttpApi.Client", "JobInsight.HttpApi.Client\JobInsight.HttpApi.Client.csproj", "{8DABBE99-C60D-8D2B-4811-1C7DF0067B58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.HttpApi.Host", "JobInsight.HttpApi.Host\JobInsight.HttpApi.Host.csproj", "{A2E7D17A-4C50-2ED6-3A97-B9028C32BEA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.MongoDB", "JobInsight.MongoDB\JobInsight.MongoDB.csproj", "{DFC77958-32C6-1292-0B04-66AE8292FB8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Web", "JobInsight.Web\JobInsight.Web.csproj", "{EDFFBEE7-620A-75CC-B2E8-138C6817DCCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobInsight.Web.Host", "JobInsight.Web.Host\JobInsight.Web.Host.csproj", "{61EED1DE-2E9F-EC3A-AD18-D8AF409861E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2332635-81B5-DD3D-C0FA-122A0F55C68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2332635-81B5-DD3D-C0FA-122A0F55C68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2332635-81B5-DD3D-C0FA-122A0F55C68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2332635-81B5-DD3D-C0FA-122A0F55C68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B629DE7-F200-DE13-DEFF-395EEDE23A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B629DE7-F200-DE13-DEFF-395EEDE23A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B629DE7-F200-DE13-DEFF-395EEDE23A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B629DE7-F200-DE13-DEFF-395EEDE23A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006C1889-ECF8-0555-F287-CB5DB0D06AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006C1889-ECF8-0555-F287-CB5DB0D06AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006C1889-ECF8-0555-F287-CB5DB0D06AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006C1889-ECF8-0555-F287-CB5DB0D06AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC7693F-617A-5F4B-C994-E5461297C09C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC7693F-617A-5F4B-C994-E5461297C09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC7693F-617A-5F4B-C994-E5461297C09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC7693F-617A-5F4B-C994-E5461297C09C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B49CF7EE-2512-91C3-4466-0DB98127C1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49CF7EE-2512-91C3-4466-0DB98127C1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49CF7EE-2512-91C3-4466-0DB98127C1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49CF7EE-2512-91C3-4466-0DB98127C1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C976B765-B99F-B8C0-AF9B-BA8875F04C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C976B765-B99F-B8C0-AF9B-BA8875F04C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C976B765-B99F-B8C0-AF9B-BA8875F04C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C976B765-B99F-B8C0-AF9B-BA8875F04C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055C25BE-88DD-655B-D45F-83177A2D94AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055C25BE-88DD-655B-D45F-83177A2D94AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055C25BE-88DD-655B-D45F-83177A2D94AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055C25BE-88DD-655B-D45F-83177A2D94AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93EED065-929E-C5DD-B1D4-D2D00CC7276D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93EED065-929E-C5DD-B1D4-D2D00CC7276D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93EED065-929E-C5DD-B1D4-D2D00CC7276D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93EED065-929E-C5DD-B1D4-D2D00CC7276D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D5007A-93EE-EA36-B3C8-C1605A11565A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D5007A-93EE-EA36-B3C8-C1605A11565A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D5007A-93EE-EA36-B3C8-C1605A11565A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D5007A-93EE-EA36-B3C8-C1605A11565A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B79F3CA-2203-D194-3DEE-804AE2A19621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B79F3CA-2203-D194-3DEE-804AE2A19621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B79F3CA-2203-D194-3DEE-804AE2A19621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B79F3CA-2203-D194-3DEE-804AE2A19621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F382C5-F224-ABF3-1DC1-91911DF2E2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F382C5-F224-ABF3-1DC1-91911DF2E2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F382C5-F224-ABF3-1DC1-91911DF2E2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F382C5-F224-ABF3-1DC1-91911DF2E2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A320CBA-D935-9F86-FDF0-6217F883D2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A320CBA-D935-9F86-FDF0-6217F883D2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A320CBA-D935-9F86-FDF0-6217F883D2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A320CBA-D935-9F86-FDF0-6217F883D2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{066D2F77-1A7A-E1FF-E943-83FAF0F8AB4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{066D2F77-1A7A-E1FF-E943-83FAF0F8AB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{066D2F77-1A7A-E1FF-E943-83FAF0F8AB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066D2F77-1A7A-E1FF-E943-83FAF0F8AB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A122DA-DD05-9C17-3E1C-16BEE2577DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A122DA-DD05-9C17-3E1C-16BEE2577DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A122DA-DD05-9C17-3E1C-16BEE2577DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A122DA-DD05-9C17-3E1C-16BEE2577DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4051CECC-C93E-D1BA-02C4-E67802C5FC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4051CECC-C93E-D1BA-02C4-E67802C5FC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4051CECC-C93E-D1BA-02C4-E67802C5FC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4051CECC-C93E-D1BA-02C4-E67802C5FC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BDFEEF4-7914-D7C9-C0E5-4B5F70E3BAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDFEEF4-7914-D7C9-C0E5-4B5F70E3BAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDFEEF4-7914-D7C9-C0E5-4B5F70E3BAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDFEEF4-7914-D7C9-C0E5-4B5F70E3BAB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DABBE99-C60D-8D2B-4811-1C7DF0067B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DABBE99-C60D-8D2B-4811-1C7DF0067B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DABBE99-C60D-8D2B-4811-1C7DF0067B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DABBE99-C60D-8D2B-4811-1C7DF0067B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E7D17A-4C50-2ED6-3A97-B9028C32BEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E7D17A-4C50-2ED6-3A97-B9028C32BEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E7D17A-4C50-2ED6-3A97-B9028C32BEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E7D17A-4C50-2ED6-3A97-B9028C32BEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC77958-32C6-1292-0B04-66AE8292FB8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC77958-32C6-1292-0B04-66AE8292FB8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC77958-32C6-1292-0B04-66AE8292FB8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC77958-32C6-1292-0B04-66AE8292FB8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDFFBEE7-620A-75CC-B2E8-138C6817DCCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFFBEE7-620A-75CC-B2E8-138C6817DCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFFBEE7-620A-75CC-B2E8-138C6817DCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFFBEE7-620A-75CC-B2E8-138C6817DCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61EED1DE-2E9F-EC3A-AD18-D8AF409861E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61EED1DE-2E9F-EC3A-AD18-D8AF409861E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61EED1DE-2E9F-EC3A-AD18-D8AF409861E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61EED1DE-2E9F-EC3A-AD18-D8AF409861E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DF2AEAD-659D-4D43-958C-28D7A0F283B3}
+	EndGlobalSection
+EndGlobal

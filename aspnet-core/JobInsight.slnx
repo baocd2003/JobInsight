@@ -1,0 +1,35 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/JobInsight.Application.Contracts/JobInsight.Application.Contracts.csproj" />
+    <Project Path="src/JobInsight.Application/JobInsight.Application.csproj" />
+    <Project Path="src/JobInsight.AuthServer/JobInsight.AuthServer.csproj" />
+    <Project Path="src/JobInsight.Blazor.Client/JobInsight.Blazor.Client.csproj" />
+    <Project Path="src/JobInsight.Blazor.Server.Tiered/JobInsight.Blazor.Server.Tiered.csproj" />
+    <Project Path="src/JobInsight.Blazor.Server/JobInsight.Blazor.Server.csproj" />
+    <Project Path="src/JobInsight.Blazor.WebApp.Client/JobInsight.Blazor.WebApp.Client.csproj" />
+    <Project Path="src/JobInsight.Blazor.WebApp.Tiered.Client/JobInsight.Blazor.WebApp.Tiered.Client.csproj" />
+    <Project Path="src/JobInsight.Blazor.WebApp.Tiered/JobInsight.Blazor.WebApp.Tiered.csproj" />
+    <Project Path="src/JobInsight.Blazor.WebApp/JobInsight.Blazor.WebApp.csproj" />
+    <Project Path="src/JobInsight.Blazor/JobInsight.Blazor.csproj" />
+    <Project Path="src/JobInsight.DbMigrator/JobInsight.DbMigrator.csproj" />
+    <Project Path="src/JobInsight.Domain.Shared/JobInsight.Domain.Shared.csproj" />
+    <Project Path="src/JobInsight.Domain/JobInsight.Domain.csproj" />
+    <Project Path="src/JobInsight.EntityFrameworkCore/JobInsight.EntityFrameworkCore.csproj" />
+    <Project Path="src/JobInsight.HttpApi.Client/JobInsight.HttpApi.Client.csproj" />
+    <Project Path="src/JobInsight.HttpApi.Host/JobInsight.HttpApi.Host.csproj" />
+    <Project Path="src/JobInsight.HttpApi.Host/JobInsight.HttpApi.Host.csproj" />
+    <Project Path="src/JobInsight.HttpApi/JobInsight.HttpApi.csproj" />
+    <Project Path="src/JobInsight.MongoDB/JobInsight.MongoDB.csproj" />
+    <Project Path="src/JobInsight.Web.Host/JobInsight.Web.Host.csproj" />
+    <Project Path="src/JobInsight.Web/JobInsight.Web.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/JobInsight.Application.Tests/JobInsight.Application.Tests.csproj" />
+    <Project Path="test/JobInsight.Domain.Tests/JobInsight.Domain.Tests.csproj" />
+    <Project Path="test/JobInsight.EntityFrameworkCore.Tests/JobInsight.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="test/JobInsight.HttpApi.Client.ConsoleTestApp/JobInsight.HttpApi.Client.ConsoleTestApp.csproj" />
+    <Project Path="test/JobInsight.MongoDB.Tests/JobInsight.MongoDB.Tests.csproj" />
+    <Project Path="test/JobInsight.TestBase/JobInsight.TestBase.csproj" />
+    <Project Path="test/JobInsight.Web.Tests/JobInsight.Web.Tests.csproj" />
+  </Folder>
+</Solution>
