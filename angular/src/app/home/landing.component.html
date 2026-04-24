@@ -7,7 +7,7 @@
     </a>
     <div class="nav-links">
       <a href="#features">Features</a>
-      <a href="#analyser">CV Analyser</a>
+      <a routerLink="/cv-analyse">CV Analyser</a>
       <a href="#solutions">Solutions</a>
       <a href="#testimonials">Testimonials</a>
       <a class="btn-nav" routerLink="/dashboard">Dashboard →</a>
@@ -27,7 +27,7 @@
     </p>
     <div class="hero-cta">
       <a class="btn-primary" routerLink="/auth/login">Get Started Free</a>
-      <a class="btn-ghost" href="#analyser">Try CV Analyser</a>
+      <a class="btn-ghost" routerLink="/cv-analyse">Try CV Analyser</a>
     </div>
     <div class="hero-stats">
       <div class="stat">
@@ -69,7 +69,7 @@
         </div>
         <h3>CV Analysis</h3>
         <p>Upload your CV and get instant feedback on skill gaps, missing qualifications, and personalized recommendations.</p>
-        <a href="#analyser" class="card-link">Try it now →</a>
+        <a routerLink="/cv-analyse" class="card-link">Try it now →</a>
       </article>
       <article class="glass-card feature-card">
         <div class="card-icon">
@@ -85,176 +85,6 @@
         <h3>Upskilling Paths</h3>
         <p>Get data-driven recommendations on what to learn next. Build a personalized roadmap to your dream role.</p>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Divider ───────────────────────────────────────────────────────────────── -->
-<div class="grad-divider"></div>
-
-<!-- ─── CV Analyser ──────────────────────────────────────────────────────────── -->
-<section id="analyser" class="section cv-section">
-  <div class="container">
-    <div class="cv-layout fade-in">
-
-      <!-- Left: copy -->
-      <div class="cv-copy">
-        <span class="section-tag">AI-Powered</span>
-        <h2 class="section-title">Upload Your CV.<br />Know Where You Stand.</h2>
-        <p class="cv-desc">Get instant, data-driven analysis of your CV against real job postings. Discover skill gaps, strengths, and your market match score — in seconds.</p>
-        <ul class="cv-features-list">
-          <li>
-            <span class="check-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Skills extracted from your CV automatically
-          </li>
-          <li>
-            <span class="check-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Compared against thousands of live job postings
-          </li>
-          <li>
-            <span class="check-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Missing skills ranked by market priority
-          </li>
-          <li>
-            <span class="check-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Market match score out of 100
-          </li>
-        </ul>
-      </div>
-
-      <!-- Right: upload panel -->
-      <div class="cv-panel glass-card">
-
-        <!-- Upload zone (hidden when result) -->
-        <ng-container *ngIf="!analysisResult">
-          <div
-            class="upload-zone"
-            [class.drag-over]="isDragOver"
-            [class.has-file]="selectedFile"
-            (click)="triggerFileInput()"
-            (dragover)="onDragOver($event)"
-            (dragleave)="onDragLeave()"
-            (drop)="onDrop($event)"
-          >
-            <input #fileInput type="file" accept=".pdf,.docx,.doc,.txt" hidden (change)="onFileSelected($event)" />
-            <div class="upload-icon-wrap">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            </div>
-            <ng-container *ngIf="!selectedFile">
-              <p class="upload-primary">Drop your CV here</p>
-              <p class="upload-secondary">or click to browse · PDF, DOCX, TXT · max 5 MB</p>
-            </ng-container>
-            <ng-container *ngIf="selectedFile">
-              <p class="upload-primary file-name">{{ fileName }}</p>
-              <p class="upload-secondary">File ready — fill in your target role below</p>
-            </ng-container>
-          </div>
-
-          <div class="upload-controls">
-            <input
-              class="role-input"
-              type="text"
-              placeholder="Target role (e.g. Backend Developer)"
-              [(ngModel)]="targetJobTitle"
-            />
-            <button
-              class="btn-analyse"
-              [disabled]="!selectedFile || !targetJobTitle.trim() || isAnalysing"
-              (click)="analyseCV()"
-            >
-              <ng-container *ngIf="!isAnalysing">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                {{ isLoggedIn ? 'Analyse My CV' : 'Sign in to Analyse' }}
-              </ng-container>
-              <ng-container *ngIf="isAnalysing">
-                <span class="spinner"></span> Analysing…
-              </ng-container>
-            </button>
-          </div>
-
-          <div *ngIf="analysisError" class="error-banner">{{ analysisError }}</div>
-        </ng-container>
-
-        <!-- Result panel -->
-        <ng-container *ngIf="analysisResult">
-          <div class="result-header">
-            <div class="score-ring">
-              <svg viewBox="0 0 36 36" class="score-svg">
-                <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>
-                <circle
-                  cx="18" cy="18" r="15.9" fill="none"
-                  [attr.stroke]="scoreColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-dasharray="100"
-                  [attr.stroke-dashoffset]="100 - analysisResult.marketMatchScore"
-                  transform="rotate(-90 18 18)"
-                />
-              </svg>
-              <span class="score-num" [style.color]="scoreColor">{{ analysisResult.marketMatchScore | number:'1.0-0' }}</span>
-            </div>
-            <div class="score-meta">
-              <p class="score-label">Market Match Score</p>
-              <p class="score-role">vs {{ analysisResult.targetJobTitle }}</p>
-              <p class="score-jobs">Based on {{ analysisResult.referencedJobCount }} job postings</p>
-            </div>
-          </div>
-
-          <div class="result-sections">
-            <div class="result-block" *ngIf="analysisResult.strengths?.length">
-              <h4 class="result-block-title strength">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Strengths
-              </h4>
-              <ul>
-                <li *ngFor="let s of analysisResult.strengths">{{ s }}</li>
-              </ul>
-            </div>
-
-            <div class="result-block" *ngIf="analysisResult.weaknesses?.length">
-              <h4 class="result-block-title weakness">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                Weaknesses
-              </h4>
-              <ul>
-                <li *ngFor="let w of analysisResult.weaknesses">{{ w }}</li>
-              </ul>
-            </div>
-
-            <div class="result-block" *ngIf="analysisResult.missingSkills?.length">
-              <h4 class="result-block-title missing">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Skills to Add
-              </h4>
-              <div class="skill-tags">
-                <span
-                  *ngFor="let skill of analysisResult.missingSkills"
-                  class="skill-tag"
-                  [class.high]="skill.priority === 'High'"
-                  [class.medium]="skill.priority === 'Medium'"
-                  [class.low]="skill.priority === 'Low'"
-                >
-                  {{ skill.skillName }}
-                  <span class="tag-freq" *ngIf="skill.frequencyPercent > 0">{{ skill.frequencyPercent | number:'1.0-0' }}%</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn-reset" (click)="resetUpload()">
-            ↩ Analyse another CV
-          </button>
-        </ng-container>
-
-      </div>
     </div>
   </div>
 </section>

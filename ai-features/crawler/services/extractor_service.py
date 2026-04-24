@@ -1,6 +1,5 @@
 """
-Uses Groq (Llama) to extract structured job data from raw markdown/text
-returned by Firecrawl.
+Uses Groq (Llama) to extract structured job data from raw markdown.
 """
 import json
 import re
@@ -16,16 +15,12 @@ _client = Groq(api_key=GROQ_API_KEY)
 
 
 def extract_jobs_from_markdown(markdown: str, source_url: str, source_website: str) -> list[RawJob]:
-    """
-    Send crawled markdown to Groq and get back a list of structured job objects.
-    Works for both list pages (multiple jobs) and detail pages (single job).
-    """
     prompt = f"""You are a job data extraction AI. Extract all job postings from the content below.
 
 Source: {source_website} ({source_url})
 
 ## Content
-{markdown[:8000]}
+{markdown[:4000]}
 
 ## Instructions
 Extract every job posting you can find. For each job return a JSON object.

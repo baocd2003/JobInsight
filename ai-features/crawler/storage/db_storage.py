@@ -1,7 +1,5 @@
 """
 Storage adapter: kết nối thẳng PostgreSQL để insert jobs.
-Ưu điểm: nhanh, bulk insert, không cần auth token.
-Nhược điểm: bypass business logic C#, không trigger events/audit.
 """
 import uuid
 from datetime import datetime, timezone
@@ -17,7 +15,6 @@ from crawler.config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
 from crawler.models import RawJob
 from crawler.storage.base import BaseStorage
 
-# ABP table prefix
 _PREFIX = "App"
 
 
@@ -34,7 +31,6 @@ class DbStorage(BaseStorage):
         inserted = skipped = errors = 0
 
         with _conn() as conn:
-            # Pre-load existing skills from DB for matching
             skill_map = self._load_skill_map(conn)
             crawl_id = self._start_crawl_history(conn, source_website)
 
@@ -55,11 +51,13 @@ class DbStorage(BaseStorage):
 
         return {"inserted": inserted, "skipped": skipped, "errors": errors}
 
-    # ─── Job upsert ─────────────────────────────────────────────────────────────
+    # ─── Job ────────────────────────────────────────────────────────────────────
+    # Entity: Job (FullAuditedAggregateRoot)
+    # Extra ABP cols: ExtraProperties, ConcurrencyStamp, CreationTime, CreatorId,
+    #                 LastModificationTime, LastModifierId, IsDeleted, DeleterId, DeletionTime
 
     def _upsert_job(self, conn, job: RawJob, skill_map: dict, crawl_id) -> str:
         with conn.cursor() as cur:
-            # Skip if same external_id + source already exists
             if job.external_id:
                 cur.execute(
                     f'SELECT "Id" FROM "{_PREFIX}Jobs" WHERE "ExternalId"=%s AND "SourceWebsite"=%s AND "IsDeleted"=false',
@@ -76,40 +74,48 @@ class DbStorage(BaseStorage):
             cur.execute(f"""
                 INSERT INTO "{_PREFIX}Jobs" (
                     "Id", "Title", "CompanyId", "ExternalId", "SourceWebsite", "SourceUrl",
-                    "LocationId", "WorkMode", "SalaryMin", "SalaryMax", "Currency", "SalaryDisplay",
-                    "IsNegotiable", "ExperienceLevel", "YearsOfExperienceMin", "YearsOfExperienceMax",
+                    "LocationId", "WorkMode",
+                    "SalaryMin", "SalaryMax", "Currency", "SalaryDisplay", "IsNegotiable",
+                    "ExperienceLevel", "YearsOfExperienceMin", "YearsOfExperienceMax",
                     "JobType", "Description", "Requirements", "Benefits", "Tags",
-                    "PostedDate", "ExpiryDate", "LastCrawledAt", "IsActive", "IsExpired", "ViewCount",
+                    "PostedDate", "ExpiryDate", "LastCrawledAt",
+                    "IsActive", "IsExpired", "ViewCount",
                     "ExtraProperties", "ConcurrencyStamp",
                     "CreationTime", "IsDeleted"
                 ) VALUES (
                     %s,%s,%s,%s,%s,%s,
-                    %s,%s,%s,%s,%s,%s,
-                    %s,%s,%s,%s,
+                    %s,%s,
                     %s,%s,%s,%s,%s,
-                    %s,%s,%s,%s,%s,%s,
+                    %s,%s,%s,
+                    %s,%s,%s,%s,%s,
+                    %s,%s,%s,
+                    %s,%s,%s,
                     %s,%s,
                     %s,%s
                 )
             """, (
                 job_id, job.title, company_id, job.external_id or str(job_id),
                 job.source_website, job.source_url,
-                location_id, job.work_mode, job.salary_min, job.salary_max,
-                job.currency, job.salary_display,
-                False, job.experience_level, job.years_exp_min, job.years_exp_max,
-                job.job_type, job.description, job.requirements, '', '[]',
-                job.posted_date or now, job.expiry_date, now, True, False, 0,
+                location_id, job.work_mode or '',
+                job.salary_min, job.salary_max, job.currency or 'USD',
+                job.salary_display or '', False,
+                job.experience_level or '', job.years_exp_min, job.years_exp_max,
+                job.job_type or 'Full-time', job.description or '',
+                job.requirements or '', '', '[]',
+                job.posted_date or now, job.expiry_date, now,
+                True, False, 0,
                 '{}', str(uuid.uuid4()),
                 now, False,
             ))
 
-            # Insert JobSkills
             self._insert_job_skills(conn, job_id, job.skills, skill_map, now)
-
             conn.commit()
             return "inserted"
 
-    # ─── Company upsert ─────────────────────────────────────────────────────────
+    # ─── Company ────────────────────────────────────────────────────────────────
+    # Entity: Company (FullAuditedAggregateRoot)
+    # Extra ABP cols: ExtraProperties, ConcurrencyStamp, CreationTime, CreatorId,
+    #                 LastModificationTime, LastModifierId, IsDeleted, DeleterId, DeletionTime
 
     def _upsert_company(self, conn, job: RawJob, now: datetime):
         with conn.cursor() as cur:
@@ -128,41 +134,42 @@ class DbStorage(BaseStorage):
                     "Id", "Name", "NameSlug", "ExternalId", "SourceWebsite",
                     "Industry", "CompanySize", "Website", "LogoUrl",
                     "Address", "LinkedInUrl", "FacebookUrl",
-                    "TotalJobsPosted", "ActiveJobsCount",
+                    "TotalJobsPosted", "ActiveJobsCount", "ReviewCount",
                     "Description", "WhyJoinUs",
-                    "ExtraProperties", "ConcurrencyStamp", "CreationTime",
-                    "IsDeleted"
+                    "ExtraProperties", "ConcurrencyStamp",
+                    "CreationTime", "IsDeleted"
                 ) VALUES (
                     %s,%s,%s,%s,%s,
                     %s,%s,%s,%s,
                     %s,%s,%s,
-                    %s,%s,
-                    %s,%s,
                     %s,%s,%s,
-                    %s
+                    %s,%s,
+                    %s,%s,
+                    %s,%s
                 )
             """, (
                 company_id, job.company_name, slug, '', job.source_website,
-                job.company_industry or '', job.company_size or '', job.company_website or '', job.company_logo or '',
+                job.company_industry or '', job.company_size or '',
+                job.company_website or '', job.company_logo or '',
                 '', '', '',
-                0, 0,
+                0, 0, 0,
                 '', '',
-                '{}', str(uuid.uuid4()), now,
-                False,
+                '{}', str(uuid.uuid4()),
+                now, False,
             ))
             return company_id
 
-    # ─── Location upsert ────────────────────────────────────────────────────────
+    # ─── Location ───────────────────────────────────────────────────────────────
+    # Entity: Location (CreationAuditedAggregateRoot)
+    # Fields: City, District, Country, DisplayName, Slug, Latitude?, Longitude?, TotalJobs, IsDeleted
+    # Extra ABP cols: ExtraProperties, ConcurrencyStamp, CreationTime, CreatorId
 
     def _upsert_location(self, conn, location_name: str, now: datetime) -> Optional[uuid.UUID]:
         if not location_name:
             return None
         with conn.cursor() as cur:
             slug = _slugify(location_name)
-            cur.execute(
-                f'SELECT "Id" FROM "{_PREFIX}Locations" WHERE "Slug"=%s',
-                (slug,),
-            )
+            cur.execute(f'SELECT "Id" FROM "{_PREFIX}Locations" WHERE "Slug"=%s', (slug,))
             row = cur.fetchone()
             if row:
                 return row[0]
@@ -171,20 +178,27 @@ class DbStorage(BaseStorage):
             cur.execute(f"""
                 INSERT INTO "{_PREFIX}Locations" (
                     "Id", "City", "District", "Country", "DisplayName", "Slug",
-                    "TotalJobs", "IsRemote", "IsDeleted",
+                    "TotalJobs", "IsDeleted",
                     "ExtraProperties", "ConcurrencyStamp", "CreationTime"
-                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """, (
                 loc_id, location_name, '', 'Vietnam', location_name, slug,
-                0, False, False,
+                0, False,
                 '{}', str(uuid.uuid4()), now,
             ))
             return loc_id
 
     # ─── Skills ─────────────────────────────────────────────────────────────────
+    # Entity: Skill (CreationAuditedAggregateRoot)
+    # Fields: Name, NormalizedName, Category, SubCategory, Aliases, RelatedSkills,
+    #         TotalJobMentions, TrendingScore, IconUrl, Color, IsDeleted
+    # Extra ABP cols: ExtraProperties, ConcurrencyStamp, CreationTime, CreatorId
+    #
+    # Entity: JobSkill (CreationAuditedEntity) — NO ExtraProperties, NO ConcurrencyStamp
+    # Fields: JobId, SkillId, IsRequired, IsPrimarySkill, ProficiencyLevel, MentionCount
+    # Extra ABP cols: CreationTime, CreatorId only
 
     def _load_skill_map(self, conn) -> dict:
-        """Returns { normalized_name: skill_id } for all existing skills."""
         with conn.cursor() as cur:
             cur.execute(f'SELECT "Id","NormalizedName" FROM "{_PREFIX}Skills" WHERE "IsDeleted"=false')
             return {row[1]: row[0] for row in cur.fetchall()}
@@ -198,7 +212,6 @@ class DbStorage(BaseStorage):
                 skill_id = skill_map.get(normalized)
 
                 if not skill_id:
-                    # Auto-create unknown skill
                     skill_id = uuid.uuid4()
                     cur.execute(f"""
                         INSERT INTO "{_PREFIX}Skills" (
@@ -216,19 +229,25 @@ class DbStorage(BaseStorage):
                     ))
                     skill_map[normalized] = skill_id
 
-                # Insert JobSkill (ignore duplicate)
+                # JobSkill: CreationAuditedEntity — only Id, CreationTime, CreatorId as ABP cols
                 cur.execute(f"""
                     INSERT INTO "{_PREFIX}JobSkills" (
-                        "Id","JobId","SkillId","IsRequired","IsPrimarySkill",
-                        "ProficiencyLevel","MentionCount","ExtraProperties","CreationTime"
-                    ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                        "Id", "JobId", "SkillId",
+                        "IsRequired", "IsPrimarySkill", "ProficiencyLevel", "MentionCount",
+                        "CreationTime"
+                    ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
                     ON CONFLICT DO NOTHING
                 """, (
                     uuid.uuid4(), job_id, skill_id,
-                    True, False, 'Intermediate', 1, '{}', now,
+                    True, False, 'Intermediate', 1,
+                    now,
                 ))
 
     # ─── CrawlHistory ───────────────────────────────────────────────────────────
+    # Entity: CrawlHistory (CreationAuditedAggregateRoot)
+    # Fields: SourceWebsite, StartTime, EndTime?, JobsFound, JobsCreated, JobsUpdated,
+    #         JobsSkipped, ErrorCount, ErrorDetails, Status, PagesProcessed, DurationSeconds?
+    # Extra ABP cols: ExtraProperties, ConcurrencyStamp, CreationTime, CreatorId
 
     def _start_crawl_history(self, conn, source_website: str):
         with conn.cursor() as cur:

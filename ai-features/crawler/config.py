@@ -1,14 +1,15 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'), override=True)
 
-# Firecrawl
-FIRECRAWL_API_KEY = os.environ["FIRECRAWL_API_KEY"]
-
-# Groq
+# Groq (used by CV analysis service)
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+
+# Gemini (used by crawler extractor — 1M tokens/day free)
+GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
 # Storage mode: "api" or "db"
 STORAGE_MODE = os.getenv("CRAWLER_STORAGE_MODE", "db")

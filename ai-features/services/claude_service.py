@@ -7,7 +7,7 @@ from groq import Groq
 
 from models.schemas import AnalyseRequest, AnalyseResponse, ExtractedSkill, MissingSkill
 
-load_dotenv()
+load_dotenv(override=True)
 
 _client = Groq(api_key=os.environ["GROQ_API_KEY"])
 _model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")

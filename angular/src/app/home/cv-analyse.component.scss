@@ -1,0 +1,331 @@
+$accent:       #4f9cf9;
+$accent-glow:  rgba(79, 156, 249, 0.2);
+$glass:        rgba(255, 255, 255, 0.04);
+$glass-border: rgba(255, 255, 255, 0.08);
+$text-1:       #eeeef8;
+$text-2:       #9898b8;
+$text-3:       #56567a;
+
+:host { display: block; background: #0a0a0f; min-height: 100vh; }
+
+// ─── Nav ──────────────────────────────────────────────────────────────────────
+.cv-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid $glass-border;
+}
+.cv-nav {
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  height: 58px; display: flex; align-items: center; justify-content: space-between;
+}
+.brand {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-head); font-weight: 700; font-size: 1.1rem;
+  color: $text-1; text-decoration: none;
+}
+.brand-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: $accent; box-shadow: 0 0 10px $accent-glow; flex-shrink: 0;
+}
+.back-link {
+  display: flex; align-items: center; gap: 0.4rem;
+  color: $text-3; text-decoration: none; font-size: 0.85rem; transition: color 0.2s;
+  &:hover { color: $text-1; }
+}
+
+// ══════════════════════════════════════════════════════════════ UPLOAD STATE ══
+.page-upload {
+  min-height: calc(100vh - 58px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3rem 2rem; position: relative; overflow: hidden;
+}
+.upload-orb {
+  position: absolute; top: -25%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 600px; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(79,156,249,0.13) 0%, rgba(79,156,249,0.04) 40%, transparent 70%);
+}
+.upload-center {
+  position: relative; z-index: 1; width: 100%; max-width: 620px; text-align: center;
+}
+.upload-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: $accent; margin-bottom: 1.5rem;
+  padding: 0.3rem 0.85rem; border: 1px solid rgba(79,156,249,0.2);
+  border-radius: 99px; background: rgba(79,156,249,0.06);
+}
+.upload-title {
+  font-family: var(--font-head); font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.12;
+  color: $text-1; margin-bottom: 1rem;
+  background: linear-gradient(160deg, #fff 30%, #9898b8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.upload-sub {
+  font-size: 1rem; color: $text-2; line-height: 1.7; margin-bottom: 2.5rem;
+}
+
+// Drop zone
+.drop-zone {
+  border: 1.5px dashed $glass-border; border-radius: 16px;
+  padding: 3.5rem 2rem; cursor: pointer; transition: all 0.25s;
+  background: rgba(255,255,255,0.02); margin-bottom: 1.25rem;
+  position: relative; overflow: hidden;
+
+  &:hover, &.drag-over {
+    border-color: rgba(79,156,249,0.45);
+    background: rgba(79,156,249,0.04);
+    .drop-icon { color: $accent; }
+  }
+  &.has-file {
+    border-color: rgba(79,156,249,0.35);
+    background: rgba(79,156,249,0.03);
+  }
+}
+.drop-icon {
+  display: flex; justify-content: center; margin-bottom: 1rem;
+  color: $text-3; transition: color 0.25s;
+  &.file-ok { color: $accent; }
+}
+.drop-main {
+  font-size: 1rem; color: $text-1; font-weight: 500; margin-bottom: 0.4rem;
+}
+.drop-hint { font-size: 0.8rem; color: $text-3; }
+.file-name {
+  color: $accent; font-family: var(--font-mono); font-size: 0.88rem; word-break: break-all;
+}
+
+.upload-form {
+  display: flex; gap: 0.75rem; margin-bottom: 1rem;
+  @media (max-width: 600px) { flex-direction: column; }
+}
+.role-input {
+  flex: 1; padding: 0.75rem 1rem; border-radius: 8px;
+  border: 1px solid $glass-border; background: rgba(255,255,255,0.04);
+  color: $text-1; font-family: var(--font-body); font-size: 0.92rem;
+  outline: none; transition: border-color 0.2s;
+  &::placeholder { color: $text-3; }
+  &:focus { border-color: rgba(79,156,249,0.4); }
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: 8px; border: none;
+  background: $accent; color: #0a0a0f; font-family: var(--font-body);
+  font-size: 0.92rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s; box-shadow: 0 0 30px rgba(79,156,249,0.2);
+  &:hover:not(:disabled) {
+    background: lighten($accent, 8%);
+    box-shadow: 0 0 50px rgba(79,156,249,0.4);
+    transform: translateY(-1px);
+  }
+  &:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+}
+.upload-trust {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; color: $text-3;
+  svg { opacity: 0.6; }
+}
+
+// ══════════════════════════════════════════════════════════════ LOADING STATE ══
+.page-loading {
+  min-height: calc(100vh - 58px);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.loading-orb {
+  position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 600px; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(79,156,249,0.15) 0%, transparent 65%);
+  animation: orb-pulse 2s ease-in-out infinite alternate;
+}
+@keyframes orb-pulse {
+  from { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  to   { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+.loading-center {
+  position: relative; z-index: 1; text-align: center;
+}
+.loading-doc {
+  position: relative; display: inline-block; color: $accent;
+  margin-bottom: 2rem;
+  svg { filter: drop-shadow(0 0 16px rgba(79,156,249,0.5)); }
+}
+.scan-line {
+  position: absolute; left: 0; right: 0; top: 0;
+  height: 2px; background: linear-gradient(90deg, transparent, $accent, transparent);
+  animation: scan 1.8s ease-in-out infinite;
+  box-shadow: 0 0 8px $accent;
+}
+@keyframes scan {
+  0%   { top: 0;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.loading-step {
+  font-family: var(--font-mono); font-size: 0.88rem; color: $text-2;
+  letter-spacing: 0.04em; margin-bottom: 1rem; min-height: 1.4em;
+  transition: opacity 0.3s;
+}
+.loading-dots {
+  display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 3rem;
+  span {
+    width: 6px; height: 6px; border-radius: 50%; background: $accent; opacity: 0.3;
+    animation: dot-bounce 1.2s ease-in-out infinite;
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+@keyframes dot-bounce {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(1); }
+  40%           { opacity: 1;   transform: scale(1.4); }
+}
+
+// Floating skill chips
+.floating-skills {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.fs {
+  position: absolute; font-family: var(--font-mono); font-size: 0.75rem;
+  color: $accent; border: 1px solid rgba(79,156,249,0.2);
+  background: rgba(79,156,249,0.06); border-radius: 99px;
+  padding: 0.25rem 0.65rem; opacity: 0; animation: float-skill 3s ease-in-out infinite;
+}
+.fs-1 { top: 15%; left: 8%;   animation-delay: 0s;    animation-duration: 3.2s; }
+.fs-2 { top: 25%; right: 10%; animation-delay: 0.6s;  animation-duration: 2.8s; }
+.fs-3 { top: 55%; left: 5%;   animation-delay: 1.1s;  animation-duration: 3.5s; }
+.fs-4 { top: 70%; right: 8%;  animation-delay: 0.3s;  animation-duration: 3s;   }
+.fs-5 { top: 40%; left: 12%;  animation-delay: 1.5s;  animation-duration: 2.9s; }
+.fs-6 { top: 80%; left: 20%;  animation-delay: 0.8s;  animation-duration: 3.3s; }
+.fs-7 { top: 20%; right: 20%; animation-delay: 1.8s;  animation-duration: 2.7s; }
+.fs-8 { top: 65%; right: 15%; animation-delay: 0.4s;  animation-duration: 3.1s; }
+@keyframes float-skill {
+  0%   { opacity: 0; transform: translateY(10px); }
+  30%  { opacity: 0.7; }
+  70%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+// ══════════════════════════════════════════════════════════════ RESULT STATE ══
+.page-result {
+  min-height: calc(100vh - 58px);
+  display: grid; grid-template-columns: 360px 1fr;
+  @media (max-width: 860px) { grid-template-columns: 1fr; }
+}
+
+// Slide-in animations
+.slide-in-left {
+  animation: slideLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.slide-in-right {
+  animation: slideRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+}
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+// Left panel
+.result-left {
+  background: rgba(255,255,255,0.02);
+  border-right: 1px solid $glass-border;
+  padding: 2.5rem 2rem;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.cv-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem; border-radius: 10px;
+  background: $glass; border: 1px solid $glass-border;
+}
+.cv-card-icon { color: $accent; flex-shrink: 0; }
+.cv-card-name {
+  font-family: var(--font-mono); font-size: 0.85rem; color: $text-1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cv-card-size { font-size: 0.75rem; color: $text-3; margin-top: 0.2rem; }
+
+.score-block {
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 1.5rem; border-radius: 12px;
+  background: $glass; border: 1px solid $glass-border;
+}
+.score-ring { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+.score-svg  { width: 100%; height: 100%; }
+.score-num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 1.3rem; font-weight: 600;
+}
+.score-label  { font-size: 0.72rem; color: $text-3; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+.score-verdict { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
+.score-role   { font-size: 0.85rem; color: $text-1; margin-bottom: 0.1rem; }
+.score-basis  { font-size: 0.75rem; color: $text-3; }
+
+.extracted-block { flex: 1; }
+.block-eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: $text-3; margin-bottom: 0.85rem;
+}
+.extracted-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ex-tag {
+  font-family: var(--font-mono); font-size: 0.78rem; color: $text-2;
+  padding: 0.25rem 0.65rem; border-radius: 99px;
+  background: $glass; border: 1px solid $glass-border;
+}
+.btn-reset {
+  padding: 0.65rem 1rem; border-radius: 8px;
+  border: 1px solid $glass-border; background: transparent;
+  color: $text-3; font-family: var(--font-body); font-size: 0.85rem;
+  cursor: pointer; transition: all 0.2s; text-align: center;
+  &:hover { color: $text-1; border-color: rgba(255,255,255,0.16); }
+}
+
+// Right panel
+.result-right {
+  padding: 2.5rem 3rem; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2.5rem;
+  @media (max-width: 860px) { padding: 2rem; }
+}
+.result-section {}
+.result-heading {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-head); font-size: 0.8rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  &.strength-h { color: #4ade80; }
+  &.weakness-h { color: #f87171; }
+  &.missing-h  { color: $accent; }
+}
+.result-list {
+  list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
+  li {
+    font-size: 0.92rem; color: $text-2; line-height: 1.6;
+    padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.07);
+  }
+}
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.skill-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.75rem; border-radius: 99px;
+  font-family: var(--font-mono); font-size: 0.8rem; border: 1px solid;
+  &.high   { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.25); color: #fca5a5; }
+  &.medium { background: rgba(250,204,21,0.08);  border-color: rgba(250,204,21,0.25);  color: #fde047; }
+  &.low    { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: #86efac; }
+}
+.tag-pct { opacity: 0.55; font-size: 0.72rem; }
+
+.skill-legend {
+  display: flex; gap: 1.25rem; font-size: 0.75rem; color: $text-3;
+  .leg { display: flex; align-items: center; gap: 0.35rem;
+    &::before { content: ''; width: 8px; height: 8px; border-radius: 50%; }
+    &.high::before   { background: #fca5a5; }
+    &.medium::before { background: #fde047; }
+    &.low::before    { background: #86efac; }
+  }
+}

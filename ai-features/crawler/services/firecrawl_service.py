@@ -1,35 +1,28 @@
 """
-Wraps Firecrawl SDK v4 to scrape job pages and return clean markdown.
+Web scraping service using Jina Reader (replaces Firecrawl).
+No API key required. Just a GET request to r.jina.ai/{url}.
 """
-from firecrawl import FirecrawlApp
-from crawler.config import FIRECRAWL_API_KEY
+import requests
 
-_app = FirecrawlApp(api_key=FIRECRAWL_API_KEY)
+_JINA_BASE = "https://r.jina.ai"
+_HEADERS = {
+    "Accept": "text/markdown",
+    "X-Return-Format": "markdown",
+}
+_TIMEOUT = 30
 
 
 def scrape_url(url: str) -> str:
-    """Scrape a single URL and return markdown content."""
-    result = _app.scrape(url, formats=["markdown"])
-    return result.markdown or ""
+    """Scrape a single URL and return clean markdown."""
+    resp = requests.get(f"{_JINA_BASE}/{url}", headers=_HEADERS, timeout=_TIMEOUT)
+    resp.raise_for_status()
+    return resp.text or ""
 
 
-def crawl_site(url: str, limit: int = 20, path_pattern: str = "") -> list[dict]:
+def crawl_site(url: str, limit: int = 20, path_pattern: str = "") -> list[dict]:  # noqa: ARG001
     """
-    Crawl multiple pages from a site.
+    Scrape the root URL only (Jina is single-page).
     Returns list of { url, markdown } dicts.
     """
-    params = {"limit": limit, "scrapeOptions": {"formats": ["markdown"]}}
-    if path_pattern:
-        params["includePaths"] = [path_pattern]
-
-    result = _app.crawl_url(url, **params)
-
-    pages = []
-    for page in (result.data or []):
-        md = getattr(page, "markdown", None) or ""
-        src = getattr(page, "metadata", {})
-        src_url = src.get("sourceURL", url) if isinstance(src, dict) else url
-        if md:
-            pages.append({"url": src_url, "markdown": md})
-
-    return pages
+    md = scrape_url(url)
+    return [{"url": url, "markdown": md}] if md else []

@@ -43,8 +43,9 @@ def crawl(max_jobs: int = MAX_JOBS_PER_RUN) -> list[RawJob]:
             print(f"[itviec] Extracted {len(jobs)} jobs from {listing_url}")
 
             for job in jobs:
-                if job.source_url not in seen_urls and job.title and job.company_name:
-                    seen_urls.add(job.source_url)
+                dedup_key = job.external_id or f"{job.title}|{job.company_name}"
+                if dedup_key not in seen_urls and job.title and job.company_name:
+                    seen_urls.add(dedup_key)
                     all_jobs.append(job)
 
         except Exception as e:
