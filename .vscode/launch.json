@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Crawler: Run Once",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "crawler.main",
+      "cwd": "${workspaceFolder}/ai-features",
+      "envFile": "${workspaceFolder}/ai-features/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Crawler: Run Scheduled",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "crawler.main",
+      "args": ["--schedule"],
+      "cwd": "${workspaceFolder}/ai-features",
+      "envFile": "${workspaceFolder}/ai-features/.env",
+      "console": "integratedTerminal"
+    }
+  ]
+}

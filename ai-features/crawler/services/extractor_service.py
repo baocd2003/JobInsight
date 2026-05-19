@@ -8,19 +8,19 @@ from typing import Optional
 
 from groq import Groq
 
-from crawler.config import GROQ_API_KEY, GROQ_MODEL
+from crawler.config import GROQ_API_KEY, CRAWLER_GROQ_MODEL
 from crawler.models import RawJob
 
 _client = Groq(api_key=GROQ_API_KEY)
 
 
-def extract_jobs_from_markdown(markdown: str, source_url: str, source_website: str) -> list[RawJob]:
+def extract_jobs_from_markdown(markdown: str, source_url: str, source_website: str, max_chars: int = 4000) -> list[RawJob]:
     prompt = f"""You are a job data extraction AI. Extract all job postings from the content below.
 
 Source: {source_website} ({source_url})
 
 ## Content
-{markdown[:4000]}
+{markdown[:max_chars]}
 
 ## Instructions
 Extract every job posting you can find. For each job return a JSON object.
@@ -59,7 +59,7 @@ Respond ONLY with a JSON array, no markdown:
 ]"""
 
     response = _client.chat.completions.create(
-        model=GROQ_MODEL,
+        model=CRAWLER_GROQ_MODEL,
         messages=[{"role": "user", "content": prompt}],
         max_tokens=4096,
         temperature=0.1,

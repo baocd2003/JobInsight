@@ -3,9 +3,10 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'), override=True)
 
-# Groq (used by CV analysis service)
+# Groq
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")           # CV analysis
+CRAWLER_GROQ_MODEL = os.getenv("CRAWLER_GROQ_MODEL", "llama-3.1-8b-instant")  # crawler (20k TPM)
 
 # Gemini (used by crawler extractor — 1M tokens/day free)
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
@@ -26,5 +27,6 @@ DB_USER = os.getenv("DB_USER", "postgres")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "12345")
 
 # Crawl settings
-CRAWL_INTERVAL_HOURS = int(os.getenv("CRAWL_INTERVAL_HOURS", "6"))
-MAX_JOBS_PER_RUN = int(os.getenv("MAX_JOBS_PER_RUN", "50"))
+CRAWL_INTERVAL_HOURS = int(os.getenv("CRAWL_INTERVAL_HOURS", "24"))
+MAX_JOBS_PER_RUN = int(os.getenv("MAX_JOBS_PER_RUN", "30"))
+CRAWL_DELAY_SECONDS = float(os.getenv("CRAWL_DELAY_SECONDS", "10"))  # delay between Groq calls
